@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Neko&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blog.coderneko.com/"/>
+  <updated>2019-06-22T07:55:47.529Z</updated>
+  <id>https://blog.coderneko.com/</id>
+  
+  <author>
+    <name>NekoStark</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>哦豁完蛋，Git!</title>
+    <link href="https://blog.coderneko.com/2019/06/22/ohshitgit/"/>
+    <id>https://blog.coderneko.com/2019/06/22/ohshitgit/</id>
+    <published>2019-06-21T17:14:40.394Z</published>
+    <updated>2019-06-22T07:55:47.529Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>翻译自<a href="http://ohshitgit.com/" target="_blank" rel="noopener">Oh shit, Git!</a>   原文作者:<a href="https://twitter.com/ksylor" target="_blank" rel="noopener">Katie Sylor-Miller</a></p></blockquote><p>Git很难，搞砸却很容易.特别是想要搞清楚你该怎么补救你犯得错误简直是不可能的.<br>Git文档也有着一个“先有鸡还是先有蛋的问题”:你几乎不知道该怎么去查找解决你遇到的问题的方法，除非你已经知道了能够解决你遇到的问题的方法的名字.<br>以下我将通过平直的语言列举一些我遇到过并陷入其中的糟糕问题，并最终我是怎么摆脱它们的.</p><h3 id="哦豁完蛋，我刚刚做了一些非常糟糕的操作，谁能帮我找哆啦A梦借台时光机！"><a href="#哦豁完蛋，我刚刚做了一些非常糟糕的操作，谁能帮我找哆啦A梦借台时光机！" class="headerlink" title="哦豁完蛋，我刚刚做了一些非常糟糕的操作，谁能帮我找哆啦A梦借台时光机！"></a>哦豁完蛋，我刚刚做了一些非常糟糕的操作，谁能帮我找哆啦A梦借台时光机！</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line"><span class="comment"># 你将会看到你之前在git的操作的列表，无论是在哪个分支上</span></span><br><span class="line"><span class="comment"># 每一条都有一个索引，表现为HEAD@&#123;index&#125;</span></span><br><span class="line"><span class="comment"># 找到你最早把事情搞砸之前那一步的索引</span></span><br><span class="line">git reset HEAD@&#123;index&#125;</span><br><span class="line"><span class="comment"># 时间回到了过去！</span></span><br></pre></td></tr></table></figure><blockquote><p>你可以用它来找回你不小心删除并提交了的内容,或者删除一些你把Git仓库搞炸的操作,或者从一次糟糕的merge中恢复到原来的状态,亦或是你只是想回到过去某一个一切都能正常工作的节点.我 <strong><u>经常</u></strong> 使用reflog,有许多许多许多许多的人建议我把它加在这里.</p></blockquote><h3 id="哦豁完蛋，我刚刚提交完，发现还有一些东西需要改"><a href="#哦豁完蛋，我刚刚提交完，发现还有一些东西需要改" class="headerlink" title="哦豁完蛋，我刚刚提交完，发现还有一些东西需要改!"></a>哦豁完蛋，我刚刚提交完，发现还有一些东西需要改!</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add . <span class="comment"># 或者 add 你需要提交的文件</span></span><br><span class="line">git commit --amend</span><br><span class="line"><span class="comment"># 根据提示修改或保留你上次提交的提交信息</span></span><br><span class="line"><span class="comment"># 现在，你上次的提交就已经包含了你刚刚作出的修改</span></span><br></pre></td></tr></table></figure><blockquote><p>我常常在写完代码，跑完测试然后提交准备上传发布的时候突然发现忘记做代码格式化而产生这样的问题.虽然你也可以直接提交一个新的提交记录然后通过 <strong>rebase -i</strong> 来合并这次提交和上次提交，但是相信我，前者的速度比后者快一百万倍!</p></blockquote><h3 id="哦豁完蛋，我刚刚提交的时候写错了提交信息"><a href="#哦豁完蛋，我刚刚提交的时候写错了提交信息" class="headerlink" title="哦豁完蛋，我刚刚提交的时候写错了提交信息!"></a>哦豁完蛋，我刚刚提交的时候写错了提交信息!</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br><span class="line"><span class="comment"># 根据提示修改你上次提交的提交信息</span></span><br></pre></td></tr></table></figure><blockquote><p>有时候一份没有错别字的提交记录更能够帮助你的同事理解你的工作成果</p></blockquote><h3 id="哦豁完蛋，我刚刚不小心提交到了master，但是这应该是在一条新分支上面提交的"><a href="#哦豁完蛋，我刚刚不小心提交到了master，但是这应该是在一条新分支上面提交的" class="headerlink" title="哦豁完蛋，我刚刚不小心提交到了master，但是这应该是在一条新分支上面提交的!"></a>哦豁完蛋，我刚刚不小心提交到了master，但是这应该是在一条新分支上面提交的!</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在你错误提交之后在现有的状态下创建一条新分支</span></span><br><span class="line">git branch 新分支名</span><br><span class="line"><span class="comment"># 从master分支删掉你的错误提交</span></span><br><span class="line">git reset Head~ --hard</span><br><span class="line">git checkout 新分支名</span><br><span class="line"><span class="comment"># 现在你已经在你本来想要提交到的新分支上了</span></span><br></pre></td></tr></table></figure><blockquote><p>注意:如果你已经上传到了远程仓库，那么这条方法将就帮不了你了</p></blockquote><h3 id="哦豁完蛋，我不小心提交到了错误的分支上"><a href="#哦豁完蛋，我不小心提交到了错误的分支上" class="headerlink" title="哦豁完蛋，我不小心提交到了错误的分支上!"></a>哦豁完蛋，我不小心提交到了错误的分支上!</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 撤销上次提交,并保留修改的文件</span></span><br><span class="line">git reset Head~ --soft</span><br><span class="line">git stash save</span><br><span class="line"><span class="comment"># 跳转到正确的分支上</span></span><br><span class="line">git checkout 正确的分支名</span><br><span class="line">git stash pop</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"提交信息"</span></span><br><span class="line"><span class="comment"># 现在你的提交就已经到了正确的分支上了</span></span><br></pre></td></tr></table></figure><blockquote><p>有许多人建议在这种情况下使用cherry-pick,所以以下是cherry-pick的写法，你可以挑你喜欢的来用</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout 正确的分支名</span><br><span class="line"><span class="comment"># 从错误提交的分支提取出你需要的提交</span></span><br><span class="line">git cherry-pick 错误提交的分支名</span><br><span class="line"><span class="comment"># 去错误提交的分支上删除错误的提交</span></span><br><span class="line">git checkout 错误提交的分支名</span><br><span class="line">git reset Head~ --hard</span><br></pre></td></tr></table></figure><h3 id="我受够这一团乱麻了，我放弃了！"><a href="#我受够这一团乱麻了，我放弃了！" class="headerlink" title="我受够这一团乱麻了，我放弃了！"></a>我受够这一团乱麻了，我放弃了！</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">rm -rf ./仓库目录名/</span><br><span class="line">git <span class="built_in">clone</span> 远程仓库url 仓库目录名</span><br><span class="line"><span class="built_in">cd</span> 仓库目录名</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;翻译自&lt;a href=&quot;http://ohshitgit.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Oh shit, Git!&lt;/a&gt;   原文作者:&lt;a href=&quot;https://twitter.com/ksyl
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
